@@ -10,7 +10,6 @@ Work Queues - one task producer / many workers sharing work.
 
 
 """
-
 import pika
 import sys
 import webbrowser
@@ -26,8 +25,14 @@ def offer_rabbitmq_admin_site():
 # call the function defined above
 offer_rabbitmq_admin_site()
 
-# create a blocking connection to the RabbitMQ server
-connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+# Define RabbitMQ credentials
+credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+
+# create a blocking connection to the RabbitMQ server with credentials
+connection = pika.BlockingConnection(pika.ConnectionParameters(
+    host="localhost",
+    credentials=credentials
+))
 # use the connection to create a communication channel
 channel = connection.channel()
 # use the channel to declare a durable queue
@@ -36,7 +41,7 @@ channel = connection.channel()
 # messages will not be deleted until the consumer acknowledges
 channel.queue_declare(queue="task_queue", durable=True)
 # create a message by joining the command line arguments
-message = " ".join(sys.argv[1:]) or "First task..."
+message = " ".join(sys.argv[1:]) or "dont talk to me"
 # publish the message to the queue
 channel.basic_publish(
     exchange="",

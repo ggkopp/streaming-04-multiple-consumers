@@ -25,19 +25,18 @@ import sys
 import os
 import time
 
-
 def listen_for_tasks():
     """ Continuously listen for task messages on a named queue."""
     
     # create a blocking connection to the RabbitMQ server
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+    credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost", credentials=credentials))
     # use the connection to create a communication channel
     ch = connection.channel()
 
     # define a callback function to be called when a message is received
     def callback(ch, method, properties, body):
         """ Define behavior on getting a message."""
-
         # decode the binary message body to a string
         print(f" [x] Received {body.decode()}")
         # simulate work by sleeping for the number of dots in the message
@@ -51,7 +50,7 @@ def listen_for_tasks():
     # use the channel to declare a durable queue
     # a durable queue will survive a RabbitMQ server restart
     # and help ensure messages are processed in order
-    # messages will not be deleted until the consumer acknowledges    
+    # messages will not be deleted until the consumer acknowledges
     ch.queue_declare(queue="task_queue", durable=True)
     print(" [*] Ready for work. To exit press CTRL+C")
 
@@ -62,9 +61,9 @@ def listen_for_tasks():
     # being consumed and processed concurrently.
     # This helps prevent a worker from becoming overwhelmed 
     # and improve the overall system performance.
-    # prefetch_count = Per consumer limit of unaknowledged messages      
-    ch.basic_qos(prefetch_count=1) 
-    
+    # prefetch_count = Per consumer limit of unacknowledged messages
+    ch.basic_qos(prefetch_count=1)
+
     # configure the channel to listen on a specific queue,  
     # use the callback function named callback,
     # and do not auto-acknowledge the message (let the callback handle it)
@@ -73,11 +72,9 @@ def listen_for_tasks():
     # start consuming messages via the communication channel
     ch.start_consuming()
 
-
 if __name__ == "__main__":
     try:
         listen_for_tasks()
-
     except KeyboardInterrupt:
         print("Interrupted")
         try:

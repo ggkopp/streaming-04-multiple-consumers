@@ -2,22 +2,40 @@
     This program sends a message to a queue on the RabbitMQ server.
     Make tasks harder/longer-running by adding dots at the end of the message.
 
-    Author: Denise Case
-    Date: January 15, 2023
+    Author: Garrett Kopp
+    Date: September 16, 2023
 
 """
 
 import pika
 import sys
 import webbrowser
+# Import the custom logger setup utility (local file named util_logger.py)
+from util_logger import setup_logger
+import csv
+import time
+import logging
+
+# Setup custom logging
+logger, logname = setup_logger(__file__)
+
+# Set up basic configuration for logging
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+# Declare program constants
+HOST = "localhost"
+PORT = 9999
+ADDRESS_TUPLE = (HOST, PORT)
+TASKS_FILE_NAME = "tasks.csv"
+SHOW_OFFER = False
 
 def offer_rabbitmq_admin_site():
     """Offer to open the RabbitMQ Admin website"""
-    ans = input("Would you like to monitor RabbitMQ queues? y or n ")
-    print()
-    if ans.lower() == "y":
+    global SHOW_OFFER
+    if SHOW_OFFER:
         webbrowser.open_new("http://localhost:15672/#/queues")
-        print()
 
 def send_message(host: str, queue_name: str, message: str):
     """
@@ -60,12 +78,11 @@ def send_message(host: str, queue_name: str, message: str):
 # without executing the code below.
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
-    # ask the user if they'd like to open the RabbitMQ Admin site
-    offer_rabbitmq_admin_site()
+
     # get the message from the command line
     # if no arguments are provided, use the default message
     # use the join method to convert the list of arguments into a string
     # join by the space character inside the quotes
-    message = " ".join(sys.argv[1:]) or "Third task....."
+    message = " ".join(sys.argv[1:]) or "twelfth task....."
     # send the message to the queue
-    send_message("localhost", "task_queue2", message)
+    send_message("localhost", "task_queue3", message)
