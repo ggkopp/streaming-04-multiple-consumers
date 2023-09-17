@@ -3,7 +3,7 @@
 ## Author: Garrett Kopp 
 ## GitHub Repo: https://github.com/ggkopp/streaming-04-multiple-consumers
 
-# Note: The following informaiton was performed in acending order. Responses to questions were answered post their completion. Each step is marked as "DONE" and all questions have been answered and images provided where requested. Thanks for reading! 
+### Note: The following informaiton was performed in acending order. Responses to questions were answered post their completion. Each step is marked as "DONE" and all questions have been answered and images provided where requested. Thanks for reading! 
 
 > Use RabbitMQ to distribute tasks to multiple workers
 
