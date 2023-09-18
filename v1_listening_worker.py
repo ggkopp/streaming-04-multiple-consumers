@@ -29,7 +29,7 @@ def listen_for_tasks():
     """ Continuously listen for task messages on a named queue."""
     
     # create a blocking connection to the RabbitMQ server
-    credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+    credentials = pika.PlainCredentials(username="guest", password="12121212")
     connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost", credentials=credentials))
     # use the connection to create a communication channel
     ch = connection.channel()

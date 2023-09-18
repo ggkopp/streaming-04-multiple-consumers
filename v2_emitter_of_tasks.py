@@ -2,8 +2,8 @@
     This program sends a message to a queue on the RabbitMQ server.
     Make tasks harder/longer-running by adding dots at the end of the message.
 
-    Author: Denise Case
-    Date: January 15, 2023
+    Author: Garrett Kopp
+    Date: September 16, 2023
 
 """
 
@@ -32,7 +32,7 @@ def send_message(host: str, queue_name: str, message: str):
 
     try:
         # Define RabbitMQ credentials
-        credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+        credentials = pika.PlainCredentials(username="guest", password="12121212")
 
         # create a blocking connection to the RabbitMQ server with credentials
         conn = pika.BlockingConnection(pika.ConnectionParameters(host, credentials=credentials))

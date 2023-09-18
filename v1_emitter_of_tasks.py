@@ -26,7 +26,7 @@ def offer_rabbitmq_admin_site():
 offer_rabbitmq_admin_site()
 
 # Define RabbitMQ credentials
-credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+credentials = pika.PlainCredentials(username="guest", password="12121212")
 
 # create a blocking connection to the RabbitMQ server with credentials
 connection = pika.BlockingConnection(pika.ConnectionParameters(

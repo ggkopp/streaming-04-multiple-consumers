@@ -50,7 +50,7 @@ def send_message(host: str, queue_name: str, message: str):
 
     try:
         # Define RabbitMQ credentials
-        credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+        credentials = pika.PlainCredentials(username="guest", password="12121212")
 
         # create a blocking connection to the RabbitMQ server with credentials
         conn = pika.BlockingConnection(pika.ConnectionParameters(host, credentials=credentials))
