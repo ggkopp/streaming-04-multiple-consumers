@@ -35,7 +35,7 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
     """ Continuously listen for task messages on a named queue."""
 
     # specify RabbitMQ login credentials
-    credentials = pika.PlainCredentials(username="guest", password="7hdBx81984")
+    credentials = pika.PlainCredentials(username="guest", password="12121212")
 
     # when a statement can go wrong, use a try-except block
     try:
